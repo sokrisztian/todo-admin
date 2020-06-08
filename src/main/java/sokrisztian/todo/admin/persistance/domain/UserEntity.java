@@ -1,4 +1,4 @@
-package sokrisztian.todo.admin.persistance;
+package sokrisztian.todo.admin.persistance.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -6,7 +6,7 @@ import java.util.StringJoiner;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,12 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id) &&
-                username.equals(user.username) &&
-                password.equals(user.password) &&
-                email.equals(user.email) &&
-                Objects.equals(avatar, user.avatar);
+        UserEntity userEntity = (UserEntity) o;
+        return id.equals(userEntity.id) &&
+                username.equals(userEntity.username) &&
+                password.equals(userEntity.password) &&
+                email.equals(userEntity.email) &&
+                Objects.equals(avatar, userEntity.avatar);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class User {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", UserEntity.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("username='" + username + "'")
                 .add("avatar='" + avatar + "'")

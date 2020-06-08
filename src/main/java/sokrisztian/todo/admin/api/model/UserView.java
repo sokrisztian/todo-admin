@@ -1,15 +1,13 @@
-package sokrisztian.todo.admin.api;
+package sokrisztian.todo.admin.api.model;
 
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class UserResponse {
+public class UserView {
 
     private Long id;
 
     private String username;
-
-    private String email;
 
     private String avatar;
 
@@ -17,10 +15,9 @@ public class UserResponse {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserResponse that = (UserResponse) o;
+        UserView that = (UserView) o;
         return id.equals(that.id) &&
                 username.equals(that.username) &&
-                email.equals(that.email) &&
                 avatar.equals(that.avatar);
     }
 
@@ -31,10 +28,9 @@ public class UserResponse {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", UserResponse.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", UserView.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("username='" + username + "'")
-                .add("email='" + email + "'")
                 .add("avatar='" + avatar + "'")
                 .toString();
     }
@@ -53,14 +49,6 @@ public class UserResponse {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getAvatar() {
