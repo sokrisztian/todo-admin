@@ -1,22 +1,19 @@
-package sokrisztian.todo.admin.persistance.domain;
+package sokrisztian.todo.admin.api.model;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-@Entity
-@Table(name = "todos")
-public class TodoEntity {
+public class CreateTodoForm {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(nullable = false, name = "user_id")
+    @NotNull
     private Integer userId;
 
-    @Column(nullable = false, length = 150)
+    @NotBlank
+    @Size(max = 150)
     private String description;
 
     private LocalDateTime deadline;
@@ -25,34 +22,24 @@ public class TodoEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TodoEntity that = (TodoEntity) o;
-        return id.equals(that.id) &&
-                userId.equals(that.userId) &&
+        CreateTodoForm that = (CreateTodoForm) o;
+        return userId.equals(that.userId) &&
                 description.equals(that.description) &&
                 Objects.equals(deadline, that.deadline);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(userId);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", TodoEntity.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
+        return new StringJoiner(", ", CreateTodoForm.class.getSimpleName() + "[", "]")
                 .add("userId=" + userId)
                 .add("description='" + description + "'")
                 .add("deadline=" + deadline)
                 .toString();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Integer getUserId() {

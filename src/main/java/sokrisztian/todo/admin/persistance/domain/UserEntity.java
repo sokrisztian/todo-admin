@@ -50,7 +50,7 @@ public class UserEntity {
                 .toString();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
