@@ -15,7 +15,7 @@ public class UserEntity {
     @Column(nullable = false, length = 20)
     private String username;
 
-    @Column(nullable = false, length = 32) // Encryption: MD5
+    @Column(nullable = false, length = 64)
     private String password;
 
     @Column(unique = true, nullable = false, length = 50)
