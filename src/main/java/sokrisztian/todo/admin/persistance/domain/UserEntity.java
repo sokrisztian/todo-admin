@@ -12,12 +12,16 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 20)
     private String username;
 
+    @Column(nullable = false, length = 32) // Encryption: MD5
     private String password;
 
+    @Column(unique = true, nullable = false, length = 50)
     private String email;
 
+    @Column(length = 55) // Format: <email>.<extension>
     private String avatar;
 
     @Override
