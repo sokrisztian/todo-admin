@@ -1,35 +1,25 @@
-package sokrisztian.todo.admin.persistance.domain;
+package sokrisztian.todo.admin.api.model;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-@Entity
-@Table(name = "todos")
-public class TodoEntity {
+public class TodoView {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "user_id")
+    private int id;
     private int userId;
-
-    @Column(nullable = false, length = 150)
     private String description;
-
     private LocalDateTime deadline;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TodoEntity that = (TodoEntity) o;
-        return userId == that.userId &&
-                id.equals(that.id) &&
-                description.equals(that.description) &&
-                Objects.equals(deadline, that.deadline);
+        TodoView todoView = (TodoView) o;
+        return id == todoView.id &&
+                userId == todoView.userId &&
+                description.equals(todoView.description) &&
+                Objects.equals(deadline, todoView.deadline);
     }
 
     @Override
@@ -39,7 +29,7 @@ public class TodoEntity {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", TodoEntity.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", TodoView.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("userId=" + userId)
                 .add("description='" + description + "'")

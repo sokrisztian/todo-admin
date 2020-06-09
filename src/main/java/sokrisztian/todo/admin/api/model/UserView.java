@@ -5,20 +5,18 @@ import java.util.StringJoiner;
 
 public class UserView {
 
-    private Long id;
-
+    private int id;
     private String username;
-
     private String avatar;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserView that = (UserView) o;
-        return id.equals(that.id) &&
-                username.equals(that.username) &&
-                avatar.equals(that.avatar);
+        UserView userView = (UserView) o;
+        return id == userView.id &&
+                username.equals(userView.username) &&
+                Objects.equals(avatar, userView.avatar);
     }
 
     @Override
@@ -35,11 +33,11 @@ public class UserView {
                 .toString();
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
