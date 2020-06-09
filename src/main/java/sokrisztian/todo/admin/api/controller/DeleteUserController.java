@@ -4,15 +4,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sokrisztian.todo.admin.logic.service.DeleteTodoService;
+import sokrisztian.todo.admin.logic.service.DeleteUserService;
 
 @RestController
-@RequestMapping("/todos")
-public class DeleteTodoController {
+@RequestMapping("/users")
+public class DeleteUserController {
 
-    private final DeleteTodoService service;
+    private final DeleteUserService service;
 
-    public DeleteTodoController(DeleteTodoService service) {
+    public DeleteUserController(DeleteUserService service) {
         this.service = service;
     }
 
