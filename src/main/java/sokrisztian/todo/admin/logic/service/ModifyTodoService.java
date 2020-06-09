@@ -15,14 +15,14 @@ public class ModifyTodoService {
     }
 
     public void modify(ModifyTodoForm todoForm) {
-        TodoEntity currentTodo = repository.findById(todoForm.getId()).get();
-        repository.save(applyChanges(currentTodo, todoForm));
+        TodoEntity presentTodo = repository.findById(todoForm.getId()).get();
+        repository.save(applyChanges(presentTodo, todoForm));
     }
 
-    private TodoEntity applyChanges(TodoEntity currentTodo, ModifyTodoForm todoForm) {
-        currentTodo.setDescription(todoForm.getDescription());
-        currentTodo.setDeadline(todoForm.getDeadline());
-        return currentTodo;
+    private TodoEntity applyChanges(TodoEntity presentTodo, ModifyTodoForm todoForm) {
+        presentTodo.setDescription(todoForm.getDescription());
+        presentTodo.setDeadline(todoForm.getDeadline());
+        return presentTodo;
     }
 
 }
