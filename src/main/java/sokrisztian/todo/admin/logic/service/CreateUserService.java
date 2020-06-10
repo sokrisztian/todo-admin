@@ -16,8 +16,8 @@ public class CreateUserService {
         this.converter = converter;
     }
 
-    public void create(CreateUserForm todoForm) {
-        repository.save(converter.convert(todoForm));
+    public void create(CreateUserForm userForm) {
+        repository.save(converter.convert(userForm));
     }
 
 }

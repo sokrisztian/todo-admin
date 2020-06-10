@@ -17,15 +17,15 @@ public class ModifyUserService {
         this.digestUtils = digestUtils;
     }
 
-    public void modify(ModifyUserForm todoForm) {
-        UserEntity presentUser = repository.findById(todoForm.getId()).get();
-        repository.save(applyChanges(presentUser, todoForm));
+    public void modify(ModifyUserForm userForm) {
+        UserEntity presentUser = repository.findById(userForm.getId()).get();
+        repository.save(applyChanges(presentUser, userForm));
     }
 
-    private UserEntity applyChanges(UserEntity presentUser, ModifyUserForm todoForm) {
-        presentUser.setUsername(todoForm.getUsername());
-        presentUser.setPassword(digestUtils.digestAsHex(todoForm.getPassword()));
-        presentUser.setEmail(todoForm.getEmail());
+    private UserEntity applyChanges(UserEntity presentUser, ModifyUserForm userForm) {
+        presentUser.setUsername(userForm.getUsername());
+        presentUser.setPassword(digestUtils.digestAsHex(userForm.getPassword()));
+        presentUser.setEmail(userForm.getEmail());
         return presentUser;
     }
 

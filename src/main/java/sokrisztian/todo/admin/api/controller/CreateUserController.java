@@ -1,5 +1,7 @@
 package sokrisztian.todo.admin.api.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,8 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class CreateUserController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateUserController.class);
+
     private final CreateUserService service;
 
     public CreateUserController(CreateUserService service) {
@@ -20,8 +24,10 @@ public class CreateUserController {
     }
 
     @PostMapping
-    public void create(@Valid @RequestBody CreateUserForm todoForm) {
-        service.create(todoForm);
+    public void create(@Valid @RequestBody CreateUserForm userForm) {
+        LOGGER.info("Create user request arrived: {}", userForm);
+        service.create(userForm);
+        LOGGER.info("Create user request served: {}", userForm);
     }
 
 }
