@@ -7,4 +7,4 @@ spring:
     password: password
 app:
   avatars:
-    base-path: src/main/resources/static/avatars/
+    base-path: avatars/
