@@ -2,15 +2,15 @@ package sokrisztian.todo.admin.api.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sokrisztian.todo.admin.logic.service.UploadUserAvatarService;
+import sokrisztian.todo.admin.logic.service.UploadAvatarService;
 
 @RestController
 @RequestMapping("/users")
-public class UploadUserAvatarController {
+public class UploadAvatarController {
 
-    private final UploadUserAvatarService service;
+    private final UploadAvatarService service;
 
-    public UploadUserAvatarController(UploadUserAvatarService service) {
+    public UploadAvatarController(UploadAvatarService service) {
         this.service = service;
     }
 

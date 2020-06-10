@@ -1,6 +1,5 @@
 package sokrisztian.todo.admin.logic.service;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sokrisztian.todo.admin.persistance.domain.UserEntity;
@@ -12,15 +11,12 @@ public class DeleteUserService {
 
     private final UserBasicRepository userRepository;
     private final TodoBasicRepository todoRepository;
-    private final DeleteUserAvatarService deleteUserAvatarService;
+    private final DeleteAvatarService deleteAvatarService;
 
-    @Value("${app.avatars.base-path}")
-    private String avatarsBasePath;
-
-    public DeleteUserService(UserBasicRepository userRepository, TodoBasicRepository todoRepository, DeleteUserAvatarService deleteUserAvatarService) {
+    public DeleteUserService(UserBasicRepository userRepository, TodoBasicRepository todoRepository, DeleteAvatarService deleteAvatarService) {
         this.userRepository = userRepository;
         this.todoRepository = todoRepository;
-        this.deleteUserAvatarService = deleteUserAvatarService;
+        this.deleteAvatarService = deleteAvatarService;
     }
 
     @Transactional
@@ -38,7 +34,7 @@ public class DeleteUserService {
     }
 
     private UserEntity deleteAvatar(UserEntity user) {
-        return deleteUserAvatarService.deleteAvatar(user);
+        return deleteAvatarService.deleteAvatar(user);
     }
 
     private void deleteUser(UserEntity user) {

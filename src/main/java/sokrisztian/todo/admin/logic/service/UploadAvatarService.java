@@ -13,24 +13,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class UploadUserAvatarService {
+public class UploadAvatarService {
 
     private final UserBasicRepository userRepository;
-    private final DeleteUserAvatarService deleteUserAvatarService;
+    private final DeleteAvatarService deleteAvatarService;
 
     @Value("${app.avatars.base-path}")
     private String avatarsBasePath;
 
-    public UploadUserAvatarService(UserBasicRepository userRepository, DeleteUserAvatarService deleteUserAvatarService) {
+    public UploadAvatarService(UserBasicRepository userRepository, DeleteAvatarService deleteAvatarService) {
         this.userRepository = userRepository;
-        this.deleteUserAvatarService = deleteUserAvatarService;
+        this.deleteAvatarService = deleteAvatarService;
     }
 
     @Transactional
-    public void upload(int id, MultipartFile avatarImage) {
-        UserEntity user = deleteAvatar(findUser(id));
+    public void upload(int userId, MultipartFile avatarImage) {
+        UserEntity user = deleteAvatar(findUser(userId));
         saveImage(avatarImage, user.getEmail());
-        updateUserAvatar(user, avatarImage);
+        updateUserAvatar(user, avatarImage.getOriginalFilename());
     }
 
     private UserEntity findUser(int id) {
@@ -38,7 +38,7 @@ public class UploadUserAvatarService {
     }
 
     private UserEntity deleteAvatar(UserEntity user) {
-        return deleteUserAvatarService.deleteAvatar(user);
+        return deleteAvatarService.deleteAvatar(user);
     }
 
     private void saveImage(MultipartFile avatarImage, String userEmail) {
@@ -50,8 +50,8 @@ public class UploadUserAvatarService {
         }
     }
 
-    private void updateUserAvatar(UserEntity user, MultipartFile avatarImage) {
-        user.setAvatar(createFilename(user.getEmail(), avatarImage.getOriginalFilename()));
+    private void updateUserAvatar(UserEntity user, String originalFilename) {
+        user.setAvatar(createFilename(user.getEmail(), originalFilename));
         userRepository.save(user);
     }
 
