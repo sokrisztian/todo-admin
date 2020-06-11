@@ -18,6 +18,11 @@ public class FindTodosByUserIdController {
         this.service = service;
     }
 
+    @ModelAttribute("userId")
+    public int addUserId(@RequestParam int userId) {
+        return userId;
+    }
+
     @ModelAttribute("todos")
     public List<TodoView> addTodos(@RequestParam int userId) {
         return service.findByUserId(userId);

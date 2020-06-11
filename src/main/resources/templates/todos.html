@@ -11,8 +11,12 @@
 
 <body>
 <div class="container-fluid p-3">
-    <a href="#" class="btn btn-primary m-3">Add new TODO</a>
+    <form method="post" data-th-action="@{/todos/create-blank(userId=${userId})}">
+        <button type="submit" class="btn btn-primary m-3">Add new TODO</button>
+    </form>
+
     <a data-th-href="@{/users}" class="btn btn-primary m-3">Back to users</a>
+
     <div class="d-flex flex-wrap">
         <div data-th-each="todo : ${todos}" class="card align-self-start m-3" style="width: 20rem;">
             <form class="card-body" method="post" data-th-action="@{'/todos/' + ${todo.id} + '/modify'}">
