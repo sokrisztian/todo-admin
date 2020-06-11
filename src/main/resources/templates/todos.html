@@ -11,7 +11,7 @@
 
 <body>
 <div class="container-fluid p-3">
-    <form method="post" data-th-action="@{/todos/create-blank(userId=${userId})}">
+    <form class="d-inline" method="post" data-th-action="@{/todos/create-blank(userId=${userId})}">
         <button type="submit" class="btn btn-primary m-3">Add new TODO</button>
     </form>
 
@@ -19,6 +19,10 @@
 
     <div class="d-flex flex-wrap">
         <div data-th-each="todo : ${todos}" class="card align-self-start m-3" style="width: 20rem;">
+            <form class="card-header" method="post" data-th-action="@{'/todos/' + ${todo.id} + '/delete'}">
+                <button type="submit" class="btn btn-warning btn-sm m-1">Delete</button>
+            </form>
+
             <form class="card-body" method="post" data-th-action="@{'/todos/' + ${todo.id} + '/modify'}">
                 <div class="form-group">
                     <textarea class="form-control" name="description" data-th-text="${todo.description}"></textarea>
@@ -28,7 +32,6 @@
                     <input type="datetime-local" class="form-control" name="deadline" data-th-value="${todo.deadline}">
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm m-1">Save</button>
-                <a href="#" class="btn btn-primary btn-sm m-1">Delete</a>
             </form>
         </div>
     </div>
