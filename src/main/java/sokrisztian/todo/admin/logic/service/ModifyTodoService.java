@@ -5,6 +5,9 @@ import sokrisztian.todo.admin.api.model.ModifyTodoForm;
 import sokrisztian.todo.admin.persistance.domain.TodoEntity;
 import sokrisztian.todo.admin.persistance.repository.TodoBasicRepository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 @Service
 public class ModifyTodoService {
 
@@ -14,15 +17,23 @@ public class ModifyTodoService {
         this.repository = repository;
     }
 
-    public void modify(ModifyTodoForm todoForm) {
-        TodoEntity presentTodo = repository.findById(todoForm.getId()).get();
+    public void modify(int todoId, ModifyTodoForm todoForm) {
+        TodoEntity presentTodo = repository.findById(todoId).get();
         repository.save(applyChanges(presentTodo, todoForm));
     }
 
     private TodoEntity applyChanges(TodoEntity presentTodo, ModifyTodoForm todoForm) {
         presentTodo.setDescription(todoForm.getDescription());
-        presentTodo.setDeadline(todoForm.getDeadline());
+        presentTodo.setDeadline(parseSafely(todoForm.getDeadline()));
         return presentTodo;
+    }
+
+    private LocalDateTime parseSafely(String dateTime) {
+        try {
+            return LocalDateTime.parse(dateTime);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 
 }

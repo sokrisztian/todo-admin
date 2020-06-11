@@ -2,17 +2,17 @@ package sokrisztian.todo.admin.api.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import sokrisztian.todo.admin.api.model.ModifyTodoForm;
 import sokrisztian.todo.admin.logic.service.ModifyTodoService;
 
 import javax.validation.Valid;
 
-@RestController
-@RequestMapping("/todos")
+@Controller
 public class ModifyTodoController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ModifyTodoController.class);
@@ -23,11 +23,12 @@ public class ModifyTodoController {
         this.service = service;
     }
 
-    @PutMapping
-    public void modify(@Valid @RequestBody ModifyTodoForm todoForm) {
-        LOGGER.info("Modify TODO request arrived: {}", todoForm);
-        service.modify(todoForm);
-        LOGGER.info("Modify TODO request served: {}", todoForm);
+    @PostMapping("/todos/{id}/modify")
+    public String modify(@PathVariable int id, @Valid @ModelAttribute ModifyTodoForm todoForm, @RequestHeader String referer) {
+        LOGGER.info("Modify TODO request with {} TODO ID arrived: {}", id, todoForm);
+        service.modify(id, todoForm);
+        LOGGER.info("Modify TODO request with {} TODO ID served: {}", id, todoForm);
+        return "redirect:" + referer;
     }
 
 }

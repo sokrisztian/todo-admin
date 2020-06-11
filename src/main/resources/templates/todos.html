@@ -15,19 +15,17 @@
     <a data-th-href="@{/users}" class="btn btn-primary m-3">Back to users</a>
     <div class="d-flex flex-wrap">
         <div data-th-each="todo : ${todos}" class="card align-self-start m-3" style="width: 20rem;">
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control" id="description" data-th-text="${todo.description}"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="deadline">Deadline</label>
-                        <input type="datetime-local" class="form-control" id="deadline" data-th-value="${todo.deadline}">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm m-1">Save</button>
-                    <a href="#" class="btn btn-primary btn-sm m-1">Delete</a>
-                </form>
-            </div>
+            <form class="card-body" method="post" data-th-action="@{'/todos/' + ${todo.id} + '/modify'}">
+                <div class="form-group">
+                    <textarea class="form-control" name="description" data-th-text="${todo.description}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <input type="datetime-local" class="form-control" name="deadline" data-th-value="${todo.deadline}">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm m-1">Save</button>
+                <a href="#" class="btn btn-primary btn-sm m-1">Delete</a>
+            </form>
         </div>
     </div>
 </div>
