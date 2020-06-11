@@ -14,13 +14,17 @@
     <a data-th-href="@{/users/create}" class="btn btn-primary m-3">Add new user</a>
     <div class="d-flex flex-wrap">
         <div data-th-each="user : ${users}" class="card align-self-start m-3" style="width: 14rem;">
+            <form class="card-header" method="post" data-th-action="@{'/users/' + ${user.id} + '/delete'}">
+                <button type="submit" class="btn btn-warning btn-sm m-1">Delete</button>
+            </form>
+
             <img data-th-src="${user.avatar != null} ? @{'/avatars/' + ${user.avatar}} : @{/avatars/default-avatar.png}" class="card-img-top" alt="avatar">
+
             <div class="card-body">
                 <h5 data-th-text="${user.username}" class="card-title">Username</h5>
                 <a data-th-href="@{/todos(userId=${user.id})}" class="btn btn-primary btn-sm m-1">TODOs</a>
                 <a href="#" class="btn btn-primary btn-sm m-1">Edit profile</a>
                 <a href="#" class="btn btn-primary btn-sm m-1">Modify avatar</a>
-                <a href="#" class="btn btn-warning btn-sm m-1">Delete</a>
             </div>
         </div>
     </div>
