@@ -1,6 +1,7 @@
 package sokrisztian.todo.admin.persistance.domain;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -23,6 +24,10 @@ public class UserEntity {
 
     @Column(length = 55) // Format: <email>.<extension>
     private String avatar;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private List<TodoEntity> todos;
 
     @Override
     public boolean equals(Object o) {
@@ -88,6 +93,14 @@ public class UserEntity {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public List<TodoEntity> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<TodoEntity> todos) {
+        this.todos = todos;
     }
 
 }

@@ -7,7 +7,6 @@ import java.util.StringJoiner;
 public class TodoView {
 
     private int id;
-    private int userId;
     private String description;
     private LocalDateTime deadline;
 
@@ -17,7 +16,6 @@ public class TodoView {
         if (o == null || getClass() != o.getClass()) return false;
         TodoView todoView = (TodoView) o;
         return id == todoView.id &&
-                userId == todoView.userId &&
                 description.equals(todoView.description) &&
                 Objects.equals(deadline, todoView.deadline);
     }
@@ -31,7 +29,6 @@ public class TodoView {
     public String toString() {
         return new StringJoiner(", ", TodoView.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
-                .add("userId=" + userId)
                 .add("description='" + description + "'")
                 .add("deadline=" + deadline)
                 .toString();
@@ -43,14 +40,6 @@ public class TodoView {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getDescription() {

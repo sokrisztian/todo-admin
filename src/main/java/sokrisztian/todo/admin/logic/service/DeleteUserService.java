@@ -6,6 +6,8 @@ import sokrisztian.todo.admin.persistance.domain.UserEntity;
 import sokrisztian.todo.admin.persistance.repository.TodoBasicRepository;
 import sokrisztian.todo.admin.persistance.repository.UserBasicRepository;
 
+import java.util.ArrayList;
+
 @Service
 public class DeleteUserService {
 
@@ -21,16 +23,17 @@ public class DeleteUserService {
 
     @Transactional
     public void deleteById(int id) {
-        deleteRelatedTodos(id);
-        deleteUser(deleteAvatar(findUser(id)));
-    }
-
-    private void deleteRelatedTodos(int id) {
-        todoRepository.deleteAll(todoRepository.findByUserId(id));
+        deleteUser(deleteAvatar(deleteTodos(findUser(id))));
     }
 
     private UserEntity findUser(int id) {
         return userRepository.findById(id).get();
+    }
+
+    private UserEntity deleteTodos(UserEntity user) {
+        todoRepository.deleteAll(user.getTodos());
+        user.setTodos(new ArrayList<>());
+        return user;
     }
 
     private UserEntity deleteAvatar(UserEntity user) {

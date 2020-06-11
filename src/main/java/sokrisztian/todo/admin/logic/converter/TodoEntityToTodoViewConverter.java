@@ -12,7 +12,6 @@ public class TodoEntityToTodoViewConverter implements Converter<TodoEntity, Todo
     public TodoView convert(TodoEntity todoEntity) {
         TodoView todoView = new TodoView();
         todoView.setId(todoEntity.getId());
-        todoView.setUserId(todoEntity.getUserId());
         todoView.setDescription(todoEntity.getDescription());
         todoView.setDeadline(todoEntity.getDeadline());
         return todoView;

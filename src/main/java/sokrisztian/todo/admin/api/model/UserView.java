@@ -1,5 +1,6 @@
 package sokrisztian.todo.admin.api.model;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -8,6 +9,7 @@ public class UserView {
     private int id;
     private String username;
     private String avatar;
+    private List<TodoView> todos;
 
     @Override
     public boolean equals(Object o) {
@@ -55,6 +57,14 @@ public class UserView {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public List<TodoView> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<TodoView> todos) {
+        this.todos = todos;
     }
 
 }
