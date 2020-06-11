@@ -13,6 +13,7 @@ public class UserEntityToUserViewConverter implements Converter<UserEntity, User
         UserView userView = new UserView();
         userView.setId(userEntity.getId());
         userView.setUsername(userEntity.getUsername());
+        userView.setEmail(userEntity.getEmail());
         userView.setAvatar(userEntity.getAvatar());
         return userView;
     }

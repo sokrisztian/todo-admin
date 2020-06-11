@@ -2,15 +2,11 @@ package sokrisztian.todo.admin.api.model;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public class ModifyUserForm {
-
-    @NotNull
-    private Integer id;
 
     @NotBlank
     @Size(max = 20)
@@ -30,32 +26,22 @@ public class ModifyUserForm {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ModifyUserForm that = (ModifyUserForm) o;
-        return id.equals(that.id) &&
-                username.equals(that.username) &&
+        return username.equals(that.username) &&
                 password.equals(that.password) &&
                 email.equals(that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(username);
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", ModifyUserForm.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
                 .add("username='" + username + "'")
                 .add("email='" + email + "'")
                 .toString();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {

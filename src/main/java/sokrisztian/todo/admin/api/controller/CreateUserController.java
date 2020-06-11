@@ -23,7 +23,7 @@ public class CreateUserController {
     }
 
     @GetMapping("/users/create")
-    public String create() {
+    public String showCreatePage() {
         return "createUser";
     }
 

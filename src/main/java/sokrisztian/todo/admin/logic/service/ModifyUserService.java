@@ -17,8 +17,8 @@ public class ModifyUserService {
         this.digestUtils = digestUtils;
     }
 
-    public void modify(ModifyUserForm userForm) {
-        UserEntity presentUser = repository.findById(userForm.getId()).get();
+    public void modify(int userId, ModifyUserForm userForm) {
+        UserEntity presentUser = repository.findById(userId).get();
         repository.save(applyChanges(presentUser, userForm));
     }
 

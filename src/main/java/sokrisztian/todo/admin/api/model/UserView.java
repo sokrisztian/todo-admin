@@ -7,6 +7,7 @@ public class UserView {
 
     private int id;
     private String username;
+    private String email;
     private String avatar;
 
     @Override
@@ -16,6 +17,7 @@ public class UserView {
         UserView userView = (UserView) o;
         return id == userView.id &&
                 username.equals(userView.username) &&
+                email.equals(userView.email) &&
                 Objects.equals(avatar, userView.avatar);
     }
 
@@ -29,6 +31,7 @@ public class UserView {
         return new StringJoiner(", ", UserView.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("username='" + username + "'")
+                .add("email='" + email + "'")
                 .add("avatar='" + avatar + "'")
                 .toString();
     }
@@ -47,6 +50,14 @@ public class UserView {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAvatar() {
