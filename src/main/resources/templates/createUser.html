@@ -6,23 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>TODO - Users</title>
+    <title>TODO - Create user</title>
 </head>
 
 <body>
 <div class="container-fluid p-3">
-    <a data-th-href="@{/users/create}" class="btn btn-primary m-3">Add new user</a>
-    <div class="d-flex flex-wrap">
-        <div data-th-each="user : ${users}" class="card align-self-start m-3" style="width: 14rem;">
-            <img data-th-src="${user.avatar != null} ? @{'/avatars/' + ${user.avatar}} : @{/avatars/default-avatar.png}" class="card-img-top" alt="avatar">
-            <div class="card-body">
-                <h5 data-th-text="${user.username}" class="card-title">Username</h5>
-                <a data-th-href="@{/todos(userId=${user.id})}" class="btn btn-primary btn-sm m-1">TODOs</a>
-                <a href="#" class="btn btn-primary btn-sm m-1">Edit profile</a>
-                <a href="#" class="btn btn-primary btn-sm m-1">Modify avatar</a>
-                <a href="#" class="btn btn-warning btn-sm m-1">Delete</a>
+    <a data-th-href="@{/users}" class="btn btn-primary m-3">Back to users</a>
+
+    <div class="card m-3" style="width: 14rem;">
+        <form class="card-body" method="post" data-th-action="@{/users/create}">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" maxlength="20" class="form-control" name="username" required>
             </div>
-        </div>
+            <div class="form-group">
+                <label>Password (8 characters minimum)</label>
+                <input type="password" minlength="8" class="form-control" name="password" required>
+            </div>
+            <div class="form-group">
+                <label>Email address</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm m-1">Create</button>
+        </form>
     </div>
 </div>
 
