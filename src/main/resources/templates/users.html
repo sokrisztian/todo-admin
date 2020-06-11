@@ -24,7 +24,7 @@
                 <h5 data-th-text="${user.username}" class="card-title">Username</h5>
                 <a data-th-href="@{/todos(userId=${user.id})}" class="btn btn-primary btn-sm m-1">TODOs</a>
                 <a data-th-href="@{'/users/' + ${user.id} + '/modify'}" class="btn btn-primary btn-sm m-1">Edit profile</a>
-                <a href="#" class="btn btn-primary btn-sm m-1">Modify avatar</a>
+                <a data-th-href="@{'/users/' + ${user.id} + '/upload-avatar'}" class="btn btn-primary btn-sm m-1">Modify avatar</a>
             </div>
         </div>
     </div>
