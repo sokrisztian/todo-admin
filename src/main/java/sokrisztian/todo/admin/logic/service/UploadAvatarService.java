@@ -1,6 +1,7 @@
 package sokrisztian.todo.admin.logic.service;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +30,10 @@ public class UploadAvatarService {
     @Transactional
     public void upload(int userId, MultipartFile avatarImage) {
         UserEntity user = deleteAvatar(findUser(userId));
-        saveImage(avatarImage, user.getEmail());
-        updateUserAvatar(user, avatarImage.getOriginalFilename());
+        String newAvatarFilename = createFilename(avatarImage.getOriginalFilename());
+
+        saveImage(avatarImage, newAvatarFilename);
+        updateUserAvatar(user, newAvatarFilename);
     }
 
     private UserEntity findUser(int id) {
@@ -41,22 +44,24 @@ public class UploadAvatarService {
         return deleteAvatarService.deleteAvatar(user);
     }
 
-    private void saveImage(MultipartFile avatarImage, String userEmail) {
+    private String createFilename(String originalFilename) {
+        String name = RandomStringUtils.random(15, true, true);
+        String ext = FilenameUtils.getExtension(originalFilename);
+        return name + '.' + ext;
+    }
+
+    private void saveImage(MultipartFile avatarImage, String newAvatarFilename) {
         try {
-            Path avatarPath = Paths.get(avatarsBasePath + createFilename(userEmail, avatarImage.getOriginalFilename()));
+            Path avatarPath = Paths.get(avatarsBasePath + newAvatarFilename);
             avatarImage.transferTo(avatarPath);
         } catch (IOException e) {
             throw new RuntimeException(String.format("Failed to save '%s' avatar image: %s", avatarImage, e.getMessage()));
         }
     }
 
-    private void updateUserAvatar(UserEntity user, String originalFilename) {
-        user.setAvatar(createFilename(user.getEmail(), originalFilename));
+    private void updateUserAvatar(UserEntity user, String newAvatarFilename) {
+        user.setAvatar(newAvatarFilename);
         userRepository.save(user);
-    }
-
-    private String createFilename(String userEmail, String originalFilename) {
-        return userEmail + '.' + FilenameUtils.getExtension(originalFilename);
     }
 
 }

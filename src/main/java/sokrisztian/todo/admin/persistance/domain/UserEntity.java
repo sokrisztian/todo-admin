@@ -21,7 +21,7 @@ public class UserEntity {
     @Column(unique = true, nullable = false, length = 50)
     private String email;
 
-    @Column(length = 55) // Format: <email>.<extension>
+    @Column(length = 20)
     private String avatar;
 
     @Override
